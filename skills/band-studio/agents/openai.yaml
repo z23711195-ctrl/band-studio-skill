@@ -1,0 +1,4 @@
+interface:
+  display_name: "乐队创作工作室"
+  short_description: "从排练动机到 Suno 小样，协作处理音频、视频字幕调色与素材库"
+  default_prompt: "使用 $band-studio 整理这批乐队素材，按本次目标完成音乐或视频成品并核验交付。"
