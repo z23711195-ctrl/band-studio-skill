@@ -1,0 +1,14 @@
+{
+  "claims": [
+    {
+      "id": "duration",
+      "claim": "The output video is 60 seconds long.",
+      "evidence": "Synthetic FFprobe fixture reports format.duration = 60.000."
+    },
+    {
+      "id": "sax-heard",
+      "claim": "A clearly audible saxophone solo has been verified in the generated song.",
+      "evidence": "Only the generation prompt requesting saxophone and an HTTP success response are available. No audio review was performed."
+    }
+  ]
+}

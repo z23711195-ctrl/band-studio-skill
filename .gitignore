@@ -23,3 +23,5 @@ work/
 *.jpeg
 *.png
 *.zip
+.jev-cache/
+jev-config.json

@@ -1,0 +1,20 @@
+{
+  "brief": "Choose arrangement references for a live Jamaican roots dub song with saxophone replies, spacious bass and restrained vocals.",
+  "candidates": [
+    {
+      "id": "reference-a",
+      "summary": "A fictional studio study centered on bass, dry drums, sparse guitar chops and short saxophone answers.",
+      "evidence": "Synthetic test observation: instruments drop out in alternating phrases; saxophone replies receive tape echo. This is invented test data, not a real listening claim."
+    },
+    {
+      "id": "reference-b",
+      "summary": "A fictional festival EDM production with wobble bass, dubstep drops and elaborate vocal runs.",
+      "evidence": "Synthetic test observation: distorted electronic drops dominate the arrangement and no saxophone is present."
+    },
+    {
+      "id": "reference-c",
+      "summary": "A catalog title mentioning dub and saxophone.",
+      "evidence": "Only a title is available. No recording or reliable musical description has been reviewed."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "requirements": [
+    {"id": "genre", "text": "Use Jamaican roots dub and exclude dubstep and EDM drops."},
+    {"id": "sax", "text": "Feature saxophone answers and a saxophone solo."},
+    {"id": "vocal", "text": "Use natural restrained singing with few vocal runs. This is not an instrumental."},
+    {"id": "source", "text": "The source rehearsal recording must actually be attached before submitting."}
+  ],
+  "proposal": {
+    "styles": "Jamaican roots dub, bass-led live band, saxophone replies and saxophone solo, natural restrained vocals with minimal ornamentation.",
+    "excluded_styles": "dubstep, EDM drops, elaborate vocal runs",
+    "instrumental": false,
+    "source_attached": true
+  },
+  "observed": {
+    "styles": "Jamaican roots dub, bass-led live band, saxophone replies and saxophone solo, natural restrained vocals with minimal ornamentation.",
+    "excluded_styles": "dubstep, EDM drops, elaborate vocal runs",
+    "instrumental": false,
+    "source_attached": false
+  }
+}

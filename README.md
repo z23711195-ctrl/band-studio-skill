@@ -13,6 +13,7 @@
 - **素材库**：索引照片/音视频、可选哈希去重、技术探测、版本与来源记录。
 - **视觉制作**：真实素材选片、照片墙和海报工作分工、导出后的视觉核验。
 - **协作**：8 个专项角色加主协调者，按需要并行；没有子代理工具时顺序执行。
+- **Jev 辅助判断（v0.2.0）**：批量筛选参考与素材候选、Suno 提交前语义检查、交付结论对证据；内置缓存与失败降级。
 
 这是一套工作流和本地辅助脚本，**不是模型权重、已登录的 Suno 客户端或开箱即用的音乐转录模型**。它不包含乐队原始素材、研究数据库、完整歌词、账号或历史聊天。Suno、浏览器、Jev 和音频引擎是可选的运行环境能力，使用时检查实际可用性。
 
@@ -62,8 +63,22 @@ python3 scripts/verify_delivery.py /path/to/final.mp4 --srt /path/to/lyrics.srt 
 | doctor.py | FFmpeg/FFprobe 与关键滤镜、编码器检测 | 不证明登录、模型已下载或音乐理解正确 |
 | catalog.py | 文件清单，可选 SHA256 和 FFprobe 元数据 | 不证明看过图片、听过作品或可公开素材 |
 | verify_delivery.py | 成片格式、指定尺寸/时长、SRT 时序检查 | 不证明字幕已烧录、逐字同步或听感达标 |
+| jev.py | 通过 TypeSafe API 对文字候选排序、检查冲突和证据；默认不联网 | 不听音、看图、生成歌曲或自动操作 Suno |
 
 FFmpeg 的构建可能不包含 `ass/subtitles/drawtext`。先检测，再为当前任务选择可用构建。音频分析、字幕渲染和 Suno 操作由宿主现有工具完成，不会因安装 Skill 自动获得云端服务。
+
+## Jev 接入
+
+已配置且本次文字处理获授权时，Skill 会在适用节点主动调用 Jev。使用现有的 `TYPESAFE_API_KEY` 环境变量、私有 dotenv，或本机 `~/.config/band-studio/jev.json` 配置；仓库不保存密钥。完整说明和输入协议见 [Jev 工作流](skills/band-studio/references/jev.md)。
+
+```sh
+cd skills/band-studio
+# 仅检查合成示例，不联网；--execute 才发送一次请求。
+python3 scripts/jev.py rank --input references/examples/jev-rank.json --output /tmp/band-studio-rank-preview.json
+python3 scripts/jev.py preflight --input references/examples/jev-preflight.json --output /tmp/band-studio-preflight.json --execute
+```
+
+同批独立问题合并一次请求，成功结果缓存 24 小时，输入或规则改变后重新判断。密钥缺失、超时、限额等情况返回明确的 `deferred`，主协调者继续处理。Jev 不接收原始音视频，实际核听和视觉验收保留在原流程中。
 
 ## 验证与开发
 

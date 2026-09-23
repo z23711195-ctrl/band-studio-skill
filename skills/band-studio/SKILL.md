@@ -19,6 +19,7 @@ description: >-
 - **视频字幕、调色、花絮**：读 [video.md](references/video.md)。
 - **作品研究、媒体入库、照片墙、海报**：读 [library-and-visual.md](references/library-and-visual.md)。
 - **需要协作**：按 [roles.md](references/roles.md) 分配独立子任务。简单任务由一个代理完成，不为展示团队而启动所有角色。
+- **Jev 辅助判断**：参考资料或已审阅素材有多个候选、Suno 提交前存在语义约束、交付结论需要对证据时，按 [jev.md](references/jev.md) 调用内置适配器。已配置且本次文字处理获授权时，主动调用，不等用户再提醒；简单操作直接执行。
 
 ## 可执行工具
 
@@ -28,9 +29,10 @@ description: >-
 python3 scripts/doctor.py
 python3 scripts/catalog.py /path/to/authorized-media --output /path/to/new-index --probe --hash
 python3 scripts/verify_delivery.py /path/to/final.mp4 --srt /path/to/lyrics.srt --expect-duration 60
+python3 scripts/jev.py preflight --input /path/to/brief.json --output /path/to/new-review.json --execute
 ```
 
-具体参数以各脚本 `--help` 为准。FFmpeg 不在 PATH 时可显式指定 `--ffmpeg` / `--ffprobe`，或设置 `BAND_STUDIO_FFMPEG` / `BAND_STUDIO_FFPROBE`。脚本不会自动安装依赖、上传、登录或播放。
+具体参数以各脚本 `--help` 为准。FFmpeg 不在 PATH 时可显式指定 `--ffmpeg` / `--ffprobe`，或设置 `BAND_STUDIO_FFMPEG` / `BAND_STUDIO_FFPROBE`。脚本不会自动安装依赖、登录或播放；只有 `jev.py --execute` 会将明确准备的文字发送到 TypeSafe，默认仅本地检查。
 
 检测只决定后续哪条路径可用：某个字幕滤镜缺失不妨碍整理素材；找到 Whisper 命令不证明其模型可用；没有音频理解工具时不能将数值测量写成听感。
 
@@ -42,6 +44,8 @@ python3 scripts/verify_delivery.py /path/to/final.mp4 --srt /path/to/lyrics.srt 
 4. 将确认事实、测量候选、真实音视频观察、创作提案和用户认可分别记录，规则见 [evidence.md](references/evidence.md)。
 5. 持续保存可接续的任务状态。连接故障时复用当前授权与素材状态，先定位问题层，避免要求用户反复登录或重复上传。
 6. 完成可观察核验，再报告结果。描述词不是歌曲，索引不是听辨，FFprobe 成功不是视觉或审美验收。
+
+Jev 负责候选排序、语义冲突和证据匹配，不承担写歌、媒体感知或实际执行。优先批量一次询问、复用缓存；低信心、证据不足或接口不可用时由主协调者接手。不要把 Jev 失联升级为整个任务阻塞，也不要把其评分当作媒体已通过验收。
 
 ## 交付边界
 
